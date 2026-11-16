@@ -4,7 +4,7 @@ A small, **intentionally vulnerable** Flask + SQLite notes web app, plus a
 professional secure-coding review report that finds and fixes its flaws.
 
 > **CodeAlpha Cyber Security Internship — Task 3: Secure Coding Review**
-> GitHub repo name (to be created by the intern): **`CodeAlpha_SecureCodingReview`**
+> GitHub repo: **[CodeAlpha_SecureCodingReview](https://github.com/Master-creox/CodeAlpha_SecureCodingReview)**
 
 ## What is in this project?
 
@@ -13,6 +13,8 @@ professional secure-coding review report that finds and fixes its flaws.
 | `app.py` | The vulnerable web app (Flask + SQLite). A notes app with register / login / notes / admin. **Stays vulnerable on purpose — do not fix it here.** |
 | `SECURE_CODING_REVIEW.md` | The audit report: 9 findings with severity, file + line, vulnerable code, impact, proof of concept and a concrete fix for each, plus a secure-coding checklist. |
 | `requirements.txt` | Python dependencies (Flask). |
+| `test-run.png` | Screenshot: smoke-test run (8/8 checks pass). |
+| `test-summary.png` | Screenshot: all 9 findings by severity. |
 | `.gitignore` | Keeps the SQLite database, logs and caches out of git. |
 
 ## The app (what it does)
@@ -91,6 +93,16 @@ building (`B608`) and debug mode (`B201`) — 5 issues in total, all matching
 the manual findings. It does not catch the XSS, IDOR, missing-auth, logging
 or header issues, which is why manual inspection was the primary method.
 
+## Test results
+
+Automated smoke test (Flask test client) — 8/8 checks pass, including live
+proof of the SQL injection login bypass, unauthenticated `/admin`, stored
+XSS and IDOR.
+
+![Secure Coding Review smoke test — terminal run](test-run.png)
+
+![Secure Coding Review findings — summary](test-summary.png)
+
 ## Why the app is NOT fixed
 
 The vulnerabilities are the point of this project: the app is a target for
@@ -105,6 +117,8 @@ CodeAlpha_SecureCodingReview/
 ├── app.py                      # vulnerable Flask + SQLite notes app
 ├── SECURE_CODING_REVIEW.md     # the audit report (9 findings + fixes)
 ├── README.md                   # this file
+├── test-run.png                # screenshot: smoke-test run (8/8 pass)
+├── test-summary.png            # screenshot: 9 findings by severity
 ├── requirements.txt            # Flask
 └── .gitignore                  # notes.db, __pycache__, logs
 ```
